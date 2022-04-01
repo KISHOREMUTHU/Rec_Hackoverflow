@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../video_consultation/app_colors.dart';
 import 'blood_data.dart';
 
 class BloodBank {
@@ -397,10 +398,10 @@ List<BloodBank> loadBloodBank() {
     BloodBank(
         name: "Government  Head quarters Hospital",
         state: "Tamil Nadu",
-        district: "https://goo.gl/maps/BWoN2LiPMYy39fvr7",
+        district: "https://goo.gl/maps/BWoN2LiPMYy39fvr7", // Google Map Link
         city: "Ariyalur",
         address: "Perambalur Road, Ariyalur",
-        pincode: "621704",
+        pincode: "621704", //blank ""
         contact: "044 22209150,044 24910754,044 22350241",
         available: "Yes"),
     BloodBank(
@@ -2719,6 +2720,7 @@ List<BloodBank> loadBloodBank() {
 class BloodBankSearch extends SearchDelegate<BloodBank> {
   @override
   List<Widget> buildActions(BuildContext context) {
+    Size? size = MediaQuery.of(context).size;
     return [
       IconButton(
         icon: Icon(Icons.clear),
@@ -2751,6 +2753,7 @@ class BloodBankSearch extends SearchDelegate<BloodBank> {
 
   @override
   Widget buildResults(BuildContext context) {
+    Size? size = MediaQuery.of(context).size;
     final myList = query.isEmpty
         ? loadBloodBank()
         : loadBloodBank()
@@ -2792,6 +2795,7 @@ class BloodBankSearch extends SearchDelegate<BloodBank> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(15.0)),
                           color: Theme.of(context).primaryColor,
+                          border: Border.all(color: color),
                           boxShadow: [
                             BoxShadow(
                                 color: Theme.of(context)
@@ -2811,12 +2815,12 @@ class BloodBankSearch extends SearchDelegate<BloodBank> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
-                                    width: 160,
+                                    width: size.width * 0.6,
                                     child: Text(
                                       listItem.name!,
                                       style: GoogleFonts.montserrat(
-                                          color: Color(0xFF0492c2),
-                                          fontSize: 22,
+                                          color: color,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -2826,16 +2830,6 @@ class BloodBankSearch extends SearchDelegate<BloodBank> {
                                     style: GoogleFonts.montserrat(
                                         fontSize: 17, color: Colors.grey),
                                   ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    listItem.pincode!,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 17,
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold),
-                                  )
                                 ],
                               ),
                             ),
@@ -2894,8 +2888,8 @@ class BloodBankSearch extends SearchDelegate<BloodBank> {
         : ListView.builder(
             itemBuilder: (BuildContext context, int index) {
               final BloodBank listItem = myList[index];
-              return MaterialButton(
-                onPressed: () {
+              return GestureDetector(
+                onTap: () {
                   print(listItem.name);
                   Navigator.push(
                       context,
@@ -2910,74 +2904,71 @@ class BloodBankSearch extends SearchDelegate<BloodBank> {
                               contact: listItem.contact!,
                               city: listItem.city!)));
                 },
-                child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withAlpha(100),
-                              blurRadius: 10.0),
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 160,
-                                  child: Text(
-                                    listItem.name!,
-                                    style: GoogleFonts.montserrat(
-                                        color: Color(0xFF0492c2),
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  listItem.city!,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 17, color: Colors.grey),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  listItem.pincode!,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 17,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
-                            child: Container(
-                              width: 90,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(45),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage("assets/blood.png"),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Card(
+                    elevation: 10,
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            color: Theme.of(context).primaryColor,
+                            border: Border.all(color: color),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withAlpha(100),
+                                  blurRadius: 10.0),
+                            ]),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.57,
+                                      child: Text(
+                                        listItem.name!,
+                                        style: GoogleFonts.montserrat(
+                                            color: color,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      listItem.city!,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 17, color: Colors.grey),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 15.0),
+                                child: Container(
+                                  width: 90,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(45),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage("assets/blood.png"),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )),
+                        )),
+                  ),
+                ),
               );
             },
             itemCount: myList.length,
@@ -3019,9 +3010,7 @@ class SingleBloodBank extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(25.0),
                     child: IconButton(
-                        icon: Icon(Icons.arrow_back,
-                            color: Theme.of(context).secondaryHeaderColor,
-                            size: 30),
+                        icon: Icon(Icons.arrow_back, color: color, size: 30),
                         onPressed: () {
                           Navigator.pop(context);
                         }),
@@ -3034,7 +3023,7 @@ class SingleBloodBank extends StatelessWidget {
                     height: 200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage('assets/blood.png'),
                       ),
@@ -3053,7 +3042,7 @@ class SingleBloodBank extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.montserrat(
                                 fontSize: 32,
-                                color: Color(0xFF0492c2),
+                                color: color,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -3070,7 +3059,7 @@ class SingleBloodBank extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                           fontSize: 24,
-                          color: Colors.green,
+                          color: Theme.of(context).secondaryHeaderColor,
                         ),
                       ),
                     ),
@@ -3079,133 +3068,119 @@ class SingleBloodBank extends StatelessWidget {
                 SizedBox(height: 30),
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Theme.of(context).primaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 1,
-                            offset: Offset(0, 3),
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Address      ',
-                                    style: GoogleFonts.montserrat(
-                                        color: Theme.of(context)
-                                            .secondaryHeaderColor,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.50,
-                                    child: Text(
-                                      address!,
+                    padding: const EdgeInsets.all(13.0),
+                    child: Card(
+                      elevation: 10,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            border: Border.all(color: color)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Address      ',
                                       style: GoogleFonts.montserrat(
+                                          color: Colors.grey,
                                           fontSize: 22,
-                                          color: Colors.blue.shade900),
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      child: Text(
+                                        address!,
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: 22, color: color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Pin Code     ',
-                                    style: GoogleFonts.montserrat(
-                                        color: Theme.of(context)
-                                            .secondaryHeaderColor,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.50,
-                                    child: Text(
-                                      pincode!,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Pin Code     ',
                                       style: GoogleFonts.montserrat(
+                                          color: Colors.grey,
                                           fontSize: 22,
-                                          color: Colors.blue.shade900),
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      child: Text(
+                                        pincode!,
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: 22, color: color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Available    ',
-                                    style: GoogleFonts.montserrat(
-                                        color: Theme.of(context)
-                                            .secondaryHeaderColor,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.50,
-                                    child: Text(
-                                      available!,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Available    ',
                                       style: GoogleFonts.montserrat(
+                                          color: Colors.grey,
                                           fontSize: 22,
-                                          color: Colors.blue.shade900),
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      child: Text(
+                                        available!,
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: 22, color: color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Contact       ',
-                                    style: GoogleFonts.montserrat(
-                                        color: Theme.of(context)
-                                            .secondaryHeaderColor,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.52,
-                                    child: Text(
-                                      contact!,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Contact       ',
                                       style: GoogleFonts.montserrat(
+                                          color: Colors.grey,
                                           fontSize: 22,
-                                          color: Colors.blue.shade900),
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.52,
+                                      child: Text(
+                                        contact!,
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: 22, color: color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

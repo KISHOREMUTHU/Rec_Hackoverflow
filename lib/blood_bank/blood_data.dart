@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../video_consultation/app_colors.dart';
 import 'blood_bank_search.dart';
 
 var bloodData = <BloodBank>[
@@ -23,30 +24,35 @@ class LocationButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Color(0xFF0492c2);
+    // Color color = Color(0xFF0492c2);
     return Center(
       child: Container(
         height: 80,
         width: 250,
+        decoration: BoxDecoration(
+            border: Border.all(color: color),
+            borderRadius: BorderRadius.circular(29)),
         //color: Colors.redAccent,
         padding: EdgeInsets.all(4),
         child: OutlinedButton.icon(
           onPressed: () {
             _launchURL(url!);
           },
-          icon: const Icon(Icons.location_on, color: Colors.red),
+          icon: Icon(Icons.location_on, color: color),
           label: Text('Get More Info ',
               style: GoogleFonts.montserrat(
-                color: Theme.of(context).primaryColor,
-                fontSize: 24,
+                color: Theme.of(context).secondaryHeaderColor,
+                fontSize: 22,
               )),
           style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Color(0xFF0492c2)),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
-                side: BorderSide(color: color),
+                side: BorderSide(
+                  color: color,
+                ),
               ),
             ),
           ),

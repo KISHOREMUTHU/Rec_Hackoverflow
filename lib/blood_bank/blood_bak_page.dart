@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../rent_app/braces/braces_products.dart';
 import 'blood_bank_search.dart';
 
 class BloodBankDatsets extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BloodBankDatsetsState extends State<BloodBankDatsets> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 10,
-          backgroundColor: Colors.red,
+          backgroundColor: color,
           iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           title: Text(
             'Search Blood Banks',

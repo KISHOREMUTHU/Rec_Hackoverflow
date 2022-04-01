@@ -48,6 +48,8 @@ dependencies:
   flutter_svg: any
   razorpay_flutter: any
   stellar_flutter_sdk: ^1.3.0
+  bubble: any
+
 
 dev_dependencies:
   flutter_test:

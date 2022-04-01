@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../chatbot/start.dart';
 import '../home_page.dart';
 import '../news_app/screens/news_page.dart';
-import '../video_consultation/category_page.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class NavBarWidget extends StatefulWidget {
 
 class _NavBarWidgetState extends State<NavBarWidget> {
   int _currentIndex = 0;
-  final tabs = [const HomePage(), const CategoryPage(), const HealthNewsPage()];
+  final tabs = [const HomePage(), MyChat(), const HealthNewsPage()];
   Color? color = const Color(0xFF78fe04);
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             inactiveColor: color!,
           ),
           BottomNavyBarItem(
-            icon: const Icon(Icons.video_call_outlined),
+            icon: const FaIcon(FontAwesomeIcons.robot),
             title: Text(
-              'Video',
+              'ChatBot',
               style: GoogleFonts.montserrat(
                 fontSize: 15,
               ),
