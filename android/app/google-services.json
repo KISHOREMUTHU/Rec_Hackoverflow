@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "36906876955",
+    "project_id": "rec-hackoverflow",
+    "storage_bucket": "rec-hackoverflow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36906876955:android:dad78841909d28c8d5b8be",
+        "android_client_info": {
+          "package_name": "com.example.rec_hackoverflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36906876955-nb9o62e3kb8a03npa9nnofbc6cjj9g67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rec_hackoverflow",
+            "certificate_hash": "a916266547e21572775ff1ec0ad1f6aef2443d7e"
+          }
+        },
+        {
+          "client_id": "36906876955-s0j429h4hk9flmu2t4d2cn2pb8400ac5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm16iSMD8L0GZV51B3mmlSzNjTXyIfO6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36906876955-s0j429h4hk9flmu2t4d2cn2pb8400ac5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
