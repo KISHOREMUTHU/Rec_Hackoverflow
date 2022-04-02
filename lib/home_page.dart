@@ -31,6 +31,36 @@ class _HomePageState extends State<HomePage> {
           "https://play.google.com/store/apps/details?id=sixpack.sixpackabs.absworkout"),
     ];
 
+    List<Widget> rentProducts = [
+      singleProductScroll(
+          size,
+          'assets/workout.jpeg',
+          'Blood glucose meter',
+          '500',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/workout.jpeg',
+          'Blood glucose meter',
+          '500',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/workout.jpeg',
+          'Blood glucose meter',
+          '500',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+    ];
+
     Color? color = const Color(0xFF78fe04);
     User? user = FirebaseAuth.instance.currentUser;
 
@@ -227,6 +257,83 @@ class _HomePageState extends State<HomePage> {
           customDivider("News of the Day"),
           Product_Carousel(context),
           Container(
+            height: 30,
+            color: Theme.of(context).primaryColor,
+          ),
+          Container(
+            color: Theme.of(context).primaryColor,
+            width: size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 15.0,
+                left: 15,
+              ),
+              child: Text(
+                'Shop By Category',
+                textAlign: TextAlign.start,
+                style: GoogleFonts.nunito(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  fontSize: 22,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            color: Theme.of(context).primaryColor,
+            child: const Padding(
+              padding: EdgeInsets.only(right: 200.0),
+              child: Divider(
+                thickness: 2,
+                color: Color(0xFF78fe04),
+              ),
+            ),
+          ),
+          const ScrollableCategories(),
+          Container(
+            color: Theme.of(context).primaryColor,
+            width: size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 15.0,
+                left: 15,
+              ),
+              child: Text(
+                'Top Products to Buy/Rent',
+                textAlign: TextAlign.start,
+                style: GoogleFonts.nunito(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  fontSize: 22,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            color: Theme.of(context).primaryColor,
+            child: const Padding(
+              padding: EdgeInsets.only(right: 200.0),
+              child: Divider(
+                thickness: 2,
+                color: Color(0xFF78fe04),
+              ),
+            ),
+          ),
+          Container(
+            width: size.width,
+            color: Theme.of(context).primaryColor,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 300),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: scrolls.length,
+                itemBuilder: (context, index) {
+                  return rentProducts[index];
+                },
+              ),
+            ),
+          ),
+          Container(
             color: Theme.of(context).primaryColor,
             width: size.width,
             child: Padding(
@@ -270,39 +377,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Container(
-            height: 30,
-            color: Theme.of(context).primaryColor,
-          ),
-          Container(
-            color: Theme.of(context).primaryColor,
-            width: size.width,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 15.0,
-                left: 15,
-              ),
-              child: Text(
-                'Shop By Category',
-                textAlign: TextAlign.start,
-                style: GoogleFonts.nunito(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontSize: 22,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            color: Theme.of(context).primaryColor,
-            child: const Padding(
-              padding: EdgeInsets.only(right: 200.0),
-              child: Divider(
-                thickness: 2,
-                color: Color(0xFF78fe04),
-              ),
-            ),
-          ),
-          const ScrollableCategories(),
           Container(
             color: Theme.of(context).primaryColor,
             width: size.width,
@@ -561,6 +635,83 @@ class _HomePageState extends State<HomePage> {
                     children: <TextSpan>[
                       TextSpan(
                           text: "WorkOut",
+                          style: GoogleFonts.nunito(
+                              color: Theme.of(context).secondaryHeaderColor,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget singleProductScroll(Size size, String? image, String name, String cost,
+      String brand, String description, String color, String category) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: 250,
+          width: 180,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.4),
+                  offset: const Offset(0, 25),
+                  blurRadius: 25,
+                  spreadRadius: -10)
+            ],
+            // border: Border.all(color: Theme.of(context).secondaryHeaderColor),
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(image!),
+                    ),
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(5.0),
+                        topRight: Radius.circular(5.0))),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, left: 8.0),
+                child: Text(
+                  name,
+                  style: GoogleFonts.nunito(
+                    color: const Color(0xFF78fe04),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 100, bottom: 8),
+                child: Divider(
+                  color: Colors.blueGrey,
+                  thickness: 2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: GoogleFonts.nunito(color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: "Rs." + cost + "/-",
                           style: GoogleFonts.nunito(
                               color: Theme.of(context).secondaryHeaderColor,
                               fontWeight: FontWeight.bold)),

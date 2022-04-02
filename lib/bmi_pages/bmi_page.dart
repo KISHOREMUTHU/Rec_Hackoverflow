@@ -133,12 +133,14 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                               answer(h, w, context);
                             });
                           },
-                          child: Text(
-                            'Calculate',
-                            style: GoogleFonts.montserrat(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
+                          child: Center(
+                            child: Text(
+                              'Calculate',
+                              style: GoogleFonts.montserrat(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),

@@ -2,6 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -40,6 +42,16 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  var monthOptions = [
+    '1 week',
+    '2 weeks',
+    '4 weeks',
+  ];
+  final _formKey = GlobalKey<FormBuilderState>();
+  int? _oneTimeBuyCost;
+  double? _contractBuyCost;
+  int? _week;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +113,105 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Expanded(
                           child: Center(
                               child: Text(
-                            'Buy Now',
+                            'Buy Now @ Rs.' + widget.productCost! + "/-",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 19,
+                            ),
+                          )),
+                        ),
+                      ],
+                    ),
+                    color: color,
+                    textColor: Theme.of(context).primaryColor,
+                    elevation: 1.0,
+                    onPressed: () {
+                      launchRazorPay();
+                    },
+                  ),
+                  FormBuilder(
+                    key: _formKey,
+                    initialValue: const {
+                      "week": "1 week",
+                    },
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: Card(
+                              elevation: 10,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 11.0),
+                                  child: Center(
+                                    child: FormBuilderDropdown(
+                                      name: 'week',
+                                      decoration: InputDecoration(
+                                        labelText: 'Choose Rent Duration',
+                                        labelStyle: TextStyle(color: color),
+                                        border: InputBorder.none,
+                                      ),
+                                      // initialValue: 'Male',
+                                      allowClear: true,
+                                      onChanged: (value) {
+                                        if (value == '1 week') {
+                                          setState(() {
+                                            _week = 5;
+                                            _contractBuyCost =
+                                                (_oneTimeBuyCost! *
+                                                    _week! /
+                                                    100);
+                                          });
+                                        } else if (value == '2 weeks') {
+                                          setState(() {
+                                            _week = 10;
+                                            _contractBuyCost =
+                                                (_oneTimeBuyCost! *
+                                                    _week! /
+                                                    100);
+                                          });
+                                        } else if (value == '4 weeks') {
+                                          setState(() {
+                                            _week = 20;
+                                            _contractBuyCost =
+                                                (_oneTimeBuyCost! *
+                                                    _week! /
+                                                    100);
+                                          });
+                                        }
+                                        print(_contractBuyCost);
+                                      },
+                                      validator: FormBuilderValidators.compose([
+                                        FormBuilderValidators.required(context)
+                                      ]),
+                                      items: monthOptions
+                                          .map((gender) => DropdownMenuItem(
+                                                value: gender,
+                                                child: Text(gender),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ]),
+                  ),
+                  MaterialButton(
+                    height: 60,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                              child: Text(
+                            'Rent Now @ Rs.' +
+                                _contractBuyCost.toString() +
+                                "/-",
                             style: GoogleFonts.montserrat(
                               fontSize: 19,
                             ),
@@ -158,7 +268,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          widget.productCost!,
+                          "Rs." + widget.productCost! + "/-",
                           style: GoogleFonts.montserrat(
                             color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 16,
@@ -305,6 +415,9 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   void initState() {
+    _oneTimeBuyCost = int.parse(widget.productCost!);
+    _week = 1;
+    _contractBuyCost = (_oneTimeBuyCost! * _week! / 100).toDouble();
     super.initState();
     initaliseRazorPay();
   }
@@ -351,7 +464,7 @@ class _SimilarProductsState extends State<SimilarProducts> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -364,7 +477,7 @@ class _SimilarProductsState extends State<SimilarProducts> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -377,7 +490,7 @@ class _SimilarProductsState extends State<SimilarProducts> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -390,7 +503,59 @@ class _SimilarProductsState extends State<SimilarProducts> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
+      "productBrand": "Brace",
+      "productCategory": "Medicinal",
+      "productColor": "fuchsia",
+      "productMaterial": "Frozen",
+      "productImage": "assets/braces/brace1.jpg",
+      "productAvailability": "All Countries",
+      "productLaunchDate": "30-01-2022",
+      "productSummary": "Stretchy strap helps easy adjustment."
+    },
+    {
+      "productId": "1",
+      "productName": "Generic Arm Brace",
+      "productCost": "199",
+      "productBrand": "Brace",
+      "productCategory": "Medicinal",
+      "productColor": "fuchsia",
+      "productMaterial": "Frozen",
+      "productImage": "assets/braces/brace1.jpg",
+      "productAvailability": "All Countries",
+      "productLaunchDate": "30-01-2022",
+      "productSummary": "Stretchy strap helps easy adjustment."
+    },
+    {
+      "productId": "1",
+      "productName": "Generic Arm Brace",
+      "productCost": "199",
+      "productBrand": "Brace",
+      "productCategory": "Medicinal",
+      "productColor": "fuchsia",
+      "productMaterial": "Frozen",
+      "productImage": "assets/braces/brace1.jpg",
+      "productAvailability": "All Countries",
+      "productLaunchDate": "30-01-2022",
+      "productSummary": "Stretchy strap helps easy adjustment."
+    },
+    {
+      "productId": "1",
+      "productName": "Generic Arm Brace",
+      "productCost": "199",
+      "productBrand": "Brace",
+      "productCategory": "Medicinal",
+      "productColor": "fuchsia",
+      "productMaterial": "Frozen",
+      "productImage": "assets/braces/brace1.jpg",
+      "productAvailability": "All Countries",
+      "productLaunchDate": "30-01-2022",
+      "productSummary": "Stretchy strap helps easy adjustment."
+    },
+    {
+      "productId": "1",
+      "productName": "Generic Arm Brace",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",

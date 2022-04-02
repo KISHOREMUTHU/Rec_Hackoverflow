@@ -16,7 +16,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -29,7 +29,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -42,7 +42,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -55,7 +55,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -68,7 +68,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -81,7 +81,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -94,46 +94,7 @@ class _ProductsState extends State<Products> {
     {
       "productId": "1",
       "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "Rs.199/- for 1mo",
+      "productCost": "199",
       "productBrand": "Brace",
       "productCategory": "Medicinal",
       "productColor": "fuchsia",
@@ -213,53 +174,50 @@ class SingleProduct extends StatelessWidget {
           ],
         ),
         child: Card(
-          child: Hero(
-            tag: productName!,
-            child: Material(
-              child: InkWell(
-                onTap: () {
-                  // Passing the values to the product details page
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => ProductDetails(
-                                productBrand: productBrand,
-                                productId: productId,
-                                productName: productName,
-                                productCost: productCost,
-                                productAvailability: productAvailability,
-                                productMaterial: productMaterial,
-                                productImage: productImage,
-                                productLaunchDate: productLaunchDate,
-                                productCategory: productCategory,
-                                productColor: productColor,
-                                productSummary: productSummary,
-                              )));
-                },
-                child: GridTile(
-                  footer: Container(
-                    color: Colors.white.withAlpha(100),
-                    child: ListTile(
-                      title: Text(
-                        productName!,
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold,
-                        ),
+          child: Material(
+            child: InkWell(
+              onTap: () {
+                // Passing the values to the product details page
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => ProductDetails(
+                              productBrand: productBrand,
+                              productId: productId,
+                              productName: productName,
+                              productCost: productCost,
+                              productAvailability: productAvailability,
+                              productMaterial: productMaterial,
+                              productImage: productImage,
+                              productLaunchDate: productLaunchDate,
+                              productCategory: productCategory,
+                              productColor: productColor,
+                              productSummary: productSummary,
+                            )));
+              },
+              child: GridTile(
+                footer: Container(
+                  color: Colors.white.withAlpha(100),
+                  child: ListTile(
+                    title: Text(
+                      productName!,
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold,
                       ),
-                      subtitle: Text(
-                        productCost!,
-                        style: TextStyle(
-                          color: color,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
+                    ),
+                    subtitle: Text(
+                      productCost!,
+                      style: TextStyle(
+                        color: color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
                     ),
                   ),
-                  child: Image.asset(
-                    productImage!,
-                    fit: BoxFit.cover,
-                  ),
+                ),
+                child: Image.asset(
+                  productImage!,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

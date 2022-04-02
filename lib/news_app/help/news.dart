@@ -18,7 +18,7 @@ class HealthNews {
         ArticleModel articleModel = ArticleModel(
             title: element['title'] ?? "News",
             description: element['description'] ?? "No description available",
-            urlToImage: "assets/workout.jpg",
+            urlToImage: element['urlToImage'] ?? "assets/workout.jpg",
             author: element['author'] ?? "No author available",
             url: element['url'] ?? "https://www.google.com",
             publishedAt: element['publishedAt'] ?? "No date available",

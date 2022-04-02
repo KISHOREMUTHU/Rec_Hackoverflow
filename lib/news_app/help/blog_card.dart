@@ -44,10 +44,15 @@ class BlogCard extends StatelessWidget {
               // ignore: unnecessary_null_comparison
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: imageUrl == "assets/workout.jpg"
+                    ? Image.asset(
+                        imageUrl,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        imageUrl,
+                        fit: BoxFit.cover,
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
