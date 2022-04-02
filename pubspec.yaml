@@ -55,6 +55,7 @@ dependencies:
   form_builder_validators: ^7.8.0
   camera: ^0.9.4+18
   tflite: ^1.1.2
+  velocity_x: any
 
 dev_dependencies:
   flutter_test:

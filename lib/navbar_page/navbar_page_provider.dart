@@ -20,7 +20,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int _currentIndex = 0;
   final tabs = [
     const HomePage(),
-    MyChat(),
+
     const HealthNewsPage(),
     Home(),
     RecordStorage(),
@@ -37,17 +37,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             icon: const FaIcon(FontAwesomeIcons.house),
             title: Text(
               'Home',
-              style: GoogleFonts.montserrat(
-                fontSize: 15,
-              ),
-            ),
-            activeColor: color!,
-            inactiveColor: color!,
-          ),
-          BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.robot),
-            title: Text(
-              'ChatBot',
               style: GoogleFonts.montserrat(
                 fontSize: 15,
               ),

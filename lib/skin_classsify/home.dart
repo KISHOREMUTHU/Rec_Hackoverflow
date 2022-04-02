@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Live Emotion Detection App')),
+      appBar: AppBar(title: Text("Skin Diseease Classifier")),
       body: Column(children: [
         Padding(
           padding: EdgeInsets.all(20),

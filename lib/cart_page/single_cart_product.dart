@@ -1,110 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'braces_products.dart';
-import 'product_details.dart';
+import '../video_consultation/app_colors.dart';
+import 'cart_product_details.dart';
 
-class Products extends StatefulWidget {
-  const Products({Key? key}) : super(key: key);
+class CartProducts extends StatefulWidget {
+  const CartProducts({Key? key}) : super(key: key);
 
   @override
-  _ProductsState createState() => _ProductsState();
+  _CartProductsState createState() => _CartProductsState();
 }
 
-class _ProductsState extends State<Products> {
-  var productList = [
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-  ];
+class _CartProductsState extends State<CartProducts> {
+  var productList = [];
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -113,7 +21,7 @@ class _ProductsState extends State<Products> {
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int index) {
-          return SingleProduct(
+          return SingleCartProduct(
             productBrand: productList[index]['productBrand']!,
             productName: productList[index]['productName']!,
             productId: productList[index]['productId']!,
@@ -130,7 +38,7 @@ class _ProductsState extends State<Products> {
   }
 }
 
-class SingleProduct extends StatelessWidget {
+class SingleCartProduct extends StatelessWidget {
   final String? productId;
   final String? productName;
   final String? productCost;
@@ -143,7 +51,7 @@ class SingleProduct extends StatelessWidget {
   final String? productLaunchDate;
   final String? productSummary;
 
-  const SingleProduct(
+  const SingleCartProduct(
       {Key? key,
       this.productId,
       this.productName,
@@ -181,7 +89,7 @@ class SingleProduct extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => ProductDetails(
+                        builder: (BuildContext context) => CartProductDetails(
                               productBrand: productBrand,
                               productId: productId,
                               productName: productName,
@@ -206,7 +114,7 @@ class SingleProduct extends StatelessWidget {
                       ),
                     ),
                     subtitle: Text(
-                      "Rs." + productCost! + "/-",
+                      productCost!,
                       style: TextStyle(
                         color: color,
                         fontWeight: FontWeight.bold,

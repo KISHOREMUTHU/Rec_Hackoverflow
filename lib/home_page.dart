@@ -8,7 +8,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'bmi_pages/bmi_page.dart';
+import 'cart_page/cart_page_home.dart';
 import 'google_login_configs_provider/google_sign_in_configs_app.dart';
+import 'rent_app/braces/product_details.dart';
 import 'rent_app/scroll_categories.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> rentProducts = [
       singleProductScroll(
           size,
-          'assets/workout.jpeg',
+          'assets/pulse_oximeter.png',
           'Blood glucose meter',
           '500',
           'OxyCon',
@@ -43,8 +45,53 @@ class _HomePageState extends State<HomePage> {
           'Oxygen'),
       singleProductScroll(
           size,
-          'assets/workout.jpeg',
-          'Blood glucose meter',
+          'assets/pill_splitter.png',
+          'Pill Splitter',
+          '1000',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/non_contact_thermomemter.png',
+          'Non-con Thermometer',
+          '700',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/surgical_stand.png',
+          'Surgical Stand',
+          '2000',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/ortho_shoes.png',
+          'Ortho Shoes',
+          '1000',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/weighing_scale.png',
+          'Weighing Scale',
+          '700',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/walking_stick.png',
+          'Walking stick',
           '500',
           'OxyCon',
           'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
@@ -52,9 +99,18 @@ class _HomePageState extends State<HomePage> {
           'Oxygen'),
       singleProductScroll(
           size,
-          'assets/workout.jpeg',
-          'Blood glucose meter',
-          '500',
+          'assets/oxygen_cylinder.png',
+          'Oxygen Cylinder',
+          '1000',
+          'OxyCon',
+          'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
+          'blue',
+          'Oxygen'),
+      singleProductScroll(
+          size,
+          'assets/non_contact_thermomemter.png',
+          'Non-con Thermometer',
+          '700',
           'OxyCon',
           'The stands are used for hanging saline, glucose bottles, blood bags and different medicines. These premium quality Saline Stands are sturdy tubular structures, mounted on castors for easy movement. ',
           'blue',
@@ -85,6 +141,12 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         actions: [
+          IconButton(
+              icon: Icon(Icons.shopping_cart, color: color),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CartPage()));
+              }),
           IconButton(
               icon: Icon(Icons.logout, color: color),
               onPressed: () {
@@ -326,53 +388,9 @@ class _HomePageState extends State<HomePage> {
                 shrinkWrap: true,
                 physics: const ScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: scrolls.length,
+                itemCount: rentProducts.length,
                 itemBuilder: (context, index) {
                   return rentProducts[index];
-                },
-              ),
-            ),
-          ),
-          Container(
-            color: Theme.of(context).primaryColor,
-            width: size.width,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 15.0,
-                left: 15,
-              ),
-              child: Text(
-                'Workout',
-                textAlign: TextAlign.start,
-                style: GoogleFonts.nunito(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontSize: 22,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            color: Theme.of(context).primaryColor,
-            child: const Padding(
-              padding: EdgeInsets.only(right: 200.0),
-              child: Divider(
-                thickness: 2,
-                color: Color(0xFF78fe04),
-              ),
-            ),
-          ),
-          Container(
-            width: size.width,
-            color: Theme.of(context).primaryColor,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 300),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: scrolls.length,
-                itemBuilder: (context, index) {
-                  return scrolls[index];
                 },
               ),
             ),
@@ -654,7 +672,24 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => ProductDetails(
+                        productBrand: brand,
+                        productId: "1",
+                        productName: name,
+                        productCost: cost,
+                        productAvailability: "Yes",
+                        productMaterial: "Fuchsia",
+                        productImage: image,
+                        productLaunchDate: "01/04/2022",
+                        productCategory: category,
+                        productColor: color,
+                        productSummary: description,
+                      )));
+        },
         child: Container(
           height: 250,
           width: 180,

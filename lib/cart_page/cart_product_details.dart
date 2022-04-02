@@ -1,18 +1,17 @@
 // ignore_for_file: file_names
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:velocity_x/velocity_x.dart';
 
-import 'braces_products.dart';
-import 'single_product.dart';
+import '../video_consultation/app_colors.dart';
 
-class ProductDetails extends StatefulWidget {
+
+
+class CartProductDetails extends StatefulWidget {
   final String? productBrand;
   final String? productId;
   final String? productName;
@@ -25,25 +24,25 @@ class ProductDetails extends StatefulWidget {
   final String? productLaunchDate;
   final String? productSummary;
 
-  const ProductDetails(
+  const CartProductDetails(
       {Key? key,
-      this.productId,
-      this.productName,
-      this.productCost,
-      this.productCategory,
-      this.productColor,
-      this.productMaterial,
-      this.productImage,
-      this.productAvailability,
-      this.productLaunchDate,
-      this.productSummary,
-      this.productBrand})
+        this.productId,
+        this.productName,
+        this.productCost,
+        this.productCategory,
+        this.productColor,
+        this.productMaterial,
+        this.productImage,
+        this.productAvailability,
+        this.productLaunchDate,
+        this.productSummary,
+        this.productBrand})
       : super(key: key);
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _CartProductDetailsState createState() => _CartProductDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _CartProductDetailsState extends State<CartProductDetails> {
   var monthOptions = [
     '1 week',
     '2 weeks',
@@ -53,7 +52,6 @@ class _ProductDetailsState extends State<ProductDetails> {
   int? _oneTimeBuyCost;
   double? _contractBuyCost;
   int? _week;
-  int? quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +87,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          "Rent at Rs." + _contractBuyCost.toString() + '/-',
+                          widget.productCost!,
                           style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
+                            color: color,
                           ),
                         ),
                       ),
@@ -118,11 +114,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Expanded(
                           child: Center(
                               child: Text(
-                            'Buy Now @ Rs.' + widget.productCost! + "/-",
-                            style: GoogleFonts.montserrat(
-                              fontSize: 19,
-                            ),
-                          )),
+                                'Buy Now @ Rs.' + widget.productCost! + "/-",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 19,
+                                ),
+                              )),
                         ),
                       ],
                     ),
@@ -167,25 +163,25 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           setState(() {
                                             _week = 5;
                                             _contractBuyCost =
-                                                (_oneTimeBuyCost! *
-                                                    _week! /
-                                                    100);
+                                            (_oneTimeBuyCost! *
+                                                _week! /
+                                                100);
                                           });
                                         } else if (value == '2 weeks') {
                                           setState(() {
                                             _week = 10;
                                             _contractBuyCost =
-                                                (_oneTimeBuyCost! *
-                                                    _week! /
-                                                    100);
+                                            (_oneTimeBuyCost! *
+                                                _week! /
+                                                100);
                                           });
                                         } else if (value == '4 weeks') {
                                           setState(() {
                                             _week = 20;
                                             _contractBuyCost =
-                                                (_oneTimeBuyCost! *
-                                                    _week! /
-                                                    100);
+                                            (_oneTimeBuyCost! *
+                                                _week! /
+                                                100);
                                           });
                                         }
                                         print(_contractBuyCost);
@@ -195,9 +191,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       ]),
                                       items: monthOptions
                                           .map((gender) => DropdownMenuItem(
-                                                value: gender,
-                                                child: Text(gender),
-                                              ))
+                                        value: gender,
+                                        child: Text(gender),
+                                      ))
                                           .toList(),
                                     ),
                                   ),
@@ -207,38 +203,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                         ]),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Quantity',
-                            style: GoogleFonts.montserrat(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: color),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: VxStepper(
-                            onChange: (value) {
-                              setState(() {
-                                quantity = value;
-                                print(quantity);
-                              });
-                            },
-                            defaultValue: 1,
-                            min: 1,
-                            max: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   MaterialButton(
                     height: 60,
                     child: Row(
@@ -246,11 +210,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Expanded(
                           child: Center(
                               child: Text(
-                            'Rent Now',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 19,
-                            ),
-                          )),
+                                'Rent Now @ Rs.' +
+                                    _contractBuyCost.toString() +
+                                    "/-",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 19,
+                                ),
+                              )),
                         ),
                       ],
                     ),
@@ -259,92 +225,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     elevation: 1.0,
                     onPressed: () {
                       launchRazorPay();
-                      var user = FirebaseAuth.instance.currentUser;
-                      FirebaseFirestore.instance
-                          .collection(user!.uid + "_orders")
-                          .add({
-                        "id": widget.productId,
-                        "cost": widget.productCost,
-                        "name": widget.productName,
-                        "category": widget.productCategory,
-                        "color": widget.productColor,
-                        "material": widget.productMaterial,
-                        "image": widget.productImage,
-                        "available": widget.productAvailability,
-                        "username": "Kishore M",
-                        "mobile": "6379659221",
-                        "address": "XYZ",
-                        "launchDate": widget.productLaunchDate,
-                        "description": widget.productSummary,
-                        "brand": widget.productBrand,
-                        "timestamp": new DateTime.now(),
-                      }).then((response) {
-                        print(response.id);
-                      }).catchError((error) => print('Error'));
-                      FirebaseFirestore.instance
-                          .collection("overall_cart")
-                          .add({
-                        "id": widget.productId,
-                        "cost": widget.productCost,
-                        "name": widget.productName,
-                        "category": widget.productCategory,
-                        "color": widget.productColor,
-                        "material": widget.productMaterial,
-                        "image": widget.productImage,
-                        "available": widget.productAvailability,
-                        "launchDate": widget.productLaunchDate,
-                        "description": widget.productSummary,
-                        "brand": widget.productBrand,
-                        "username": "Kishore M",
-                        "mobile": "6379659221",
-                        "address": "XYZ",
-                        "timestamp": new DateTime.now(),
-                      }).then((response) {
-                        print(response.id);
-                      }).catchError((error) => print('Error'));
                     },
                   ),
                   const Divider(),
-                  MaterialButton(
-                    height: 60,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Center(
-                              child: Text(
-                            'Add To Cart',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 19,
-                            ),
-                          )),
-                        ),
-                      ],
-                    ),
-                    color: color,
-                    textColor: Theme.of(context).primaryColor,
-                    elevation: 1.0,
-                    onPressed: () {
-                      var user = FirebaseAuth.instance.currentUser;
-                      FirebaseFirestore.instance
-                          .collection(user!.uid + "_cart")
-                          .add({
-                        "id": widget.productId,
-                        "cost": widget.productCost,
-                        "name": widget.productName,
-                        "category": widget.productCategory,
-                        "color": widget.productColor,
-                        "material": widget.productMaterial,
-                        "image": widget.productImage,
-                        "available": widget.productAvailability,
-                        "launchDate": widget.productLaunchDate,
-                        "description": widget.productSummary,
-                        "brand": widget.productBrand,
-                        "timestamp": new DateTime.now(),
-                      }).then((response) {
-                        print(response.id);
-                      }).catchError((error) => print('Error'));
-                    },
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -509,19 +392,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                     ],
                   ),
-                  const Divider(),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Similar Products',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 360,
-                    child: SimilarProducts(),
-                  ),
+
+
                 ],
               ),
             ),
@@ -533,11 +405,9 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   void initState() {
-    quantity = 1;
-    _oneTimeBuyCost = int.parse(widget.productCost!) * quantity!;
+    _oneTimeBuyCost = int.parse(widget.productCost!);
     _week = 1;
-
-    _contractBuyCost = (_oneTimeBuyCost! * _week! / 20).toDouble() * quantity!;
+    _contractBuyCost = (_oneTimeBuyCost! * _week! / 100).toDouble();
     super.initState();
     initaliseRazorPay();
   }
@@ -572,141 +442,3 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 }
 
-class SimilarProducts extends StatefulWidget {
-  const SimilarProducts({Key? key}) : super(key: key);
-
-  @override
-  _SimilarProductsState createState() => _SimilarProductsState();
-}
-
-class _SimilarProductsState extends State<SimilarProducts> {
-  var productList = [
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-    {
-      "productId": "1",
-      "productName": "Generic Arm Brace",
-      "productCost": "199",
-      "productBrand": "Brace",
-      "productCategory": "Medicinal",
-      "productColor": "fuchsia",
-      "productMaterial": "Frozen",
-      "productImage": "assets/braces/brace1.jpg",
-      "productAvailability": "All Countries",
-      "productLaunchDate": "30-01-2022",
-      "productSummary": "Stretchy strap helps easy adjustment."
-    },
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-        itemCount: productList.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return SingleProduct(
-            productBrand: productList[index]['productBrand'],
-            productName: productList[index]['productName'],
-            productId: productList[index]['productId'],
-            productCost: productList[index]['productCost'],
-            productCategory: productList[index]['productCategory'],
-            productColor: productList[index]['productColor'],
-            productMaterial: productList[index]['productMaterial'],
-            productImage: productList[index]['productImage'],
-            productAvailability: productList[index]['productAvailability'],
-            productLaunchDate: productList[index]['productLaunchDate'],
-            productSummary: productList[index]['productSummary'],
-          );
-        });
-  }
-}
