@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,12 @@ import 'google_login_configs_provider/login_page.dart';
 import 'navbar_page/navbar_page_provider.dart';
 import 'theme_provider/theme_provider_app.dart';
 
+List<CameraDescription>? cameras;
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  cameras = await availableCameras();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),

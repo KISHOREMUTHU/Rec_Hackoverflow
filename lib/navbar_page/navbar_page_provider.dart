@@ -7,6 +7,7 @@ import 'package:rec_hackoverflow/record_storage/record_storage_provider.dart';
 import '../chatbot/start.dart';
 import '../home_page.dart';
 import '../news_app/screens/news_page.dart';
+import '../skin_classsify/home.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({Key? key}) : super(key: key);
@@ -19,9 +20,10 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int _currentIndex = 0;
   final tabs = [
     const HomePage(),
-    RecordStorage(),
     MyChat(),
-    const HealthNewsPage()
+    const HealthNewsPage(),
+    Home(),
+    RecordStorage(),
   ];
   Color? color = const Color(0xFF78fe04);
   @override
@@ -35,17 +37,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             icon: const FaIcon(FontAwesomeIcons.house),
             title: Text(
               'Home',
-              style: GoogleFonts.montserrat(
-                fontSize: 15,
-              ),
-            ),
-            activeColor: color!,
-            inactiveColor: color!,
-          ),
-          BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.recordVinyl),
-            title: Text(
-              'Records',
               style: GoogleFonts.montserrat(
                 fontSize: 15,
               ),
@@ -68,6 +59,28 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             icon: const FaIcon(FontAwesomeIcons.newspaper),
             title: Text(
               'News',
+              style: GoogleFonts.montserrat(
+                fontSize: 15,
+              ),
+            ),
+            activeColor: color!,
+            inactiveColor: color!,
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.userDoctor),
+            title: Text(
+              'Skin Classify',
+              style: GoogleFonts.montserrat(
+                fontSize: 15,
+              ),
+            ),
+            activeColor: color!,
+            inactiveColor: color!,
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.recordVinyl),
+            title: Text(
+              'Records',
               style: GoogleFonts.montserrat(
                 fontSize: 15,
               ),

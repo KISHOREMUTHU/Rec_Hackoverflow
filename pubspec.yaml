@@ -53,6 +53,8 @@ dependencies:
   firebase_storage: any
   flutter_form_builder: any
   form_builder_validators: ^7.8.0
+  camera: ^0.9.4+18
+  tflite: ^1.1.2
 
 dev_dependencies:
   flutter_test:
